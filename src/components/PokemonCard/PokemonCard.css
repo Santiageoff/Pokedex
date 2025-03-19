@@ -1,0 +1,166 @@
+.pokeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 180px;
+  height: 220px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.pokeCard:hover {
+  transform: scale(1.05);
+  box-shadow: 6px 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 140px;
+  padding: 10px;
+  position: relative;
+  background-color: #f5f5f5;
+}
+
+.top span {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+.top img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.bottom {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+/* Estilos para cada tipo de Pokémon */
+.type-normal {
+  background: #a8a77a;
+  color: #fff;
+}
+
+.type-fire {
+  background: #ee8130;
+  color: #fff;
+}
+
+.type-water {
+  background: #6390f0;
+  color: #fff;
+}
+
+.type-electric {
+  background: #f7d02c;
+  color: #333;
+}
+
+.type-grass {
+  background: #7ac74c;
+  color: #fff;
+}
+
+.type-ice {
+  background: #96d9d6;
+  color: #333;
+}
+
+.type-fighting {
+  background: #c22e28;
+  color: #fff;
+}
+
+.type-poison {
+  background: #a33ea1;
+  color: #fff;
+}
+
+.type-ground {
+  background: #e2bf65;
+  color: #333;
+}
+
+.type-flying {
+  background: #a98ff3;
+  color: #fff;
+}
+
+.type-psychic {
+  background: #f95587;
+  color: #fff;
+}
+
+.type-bug {
+  background: #a6b91a;
+  color: #333;
+}
+
+.type-rock {
+  background: #b6a136;
+  color: #fff;
+}
+
+.type-ghost {
+  background: #735797;
+  color: #fff;
+}
+
+.type-dragon {
+  background: #6f35fc;
+  color: #fff;
+}
+
+.type-dark {
+  background: #705746;
+  color: #fff;
+}
+
+.type-steel {
+  background: #b7b7ce;
+  color: #333;
+}
+
+.type-fairy {
+  background: #d685ad;
+  color: #333;
+}
+
+/* Contenedores de carga y error */
+.loadingContainer,
+.errorContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.errorContainer p {
+  font-size: 14px;
+  color: #ff4f4f;
+  text-align: center;
+}

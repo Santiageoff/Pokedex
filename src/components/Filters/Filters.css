@@ -1,0 +1,134 @@
+/* Contenedor principal de filtros */
+.filtersContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Espacio entre el buscador y el selector */
+  margin-top: 10px; /* Espacio debajo del título "Pokédex" */
+  flex-wrap: wrap; /* Permite ajuste responsivo */
+}
+
+/* Contenedor del campo de búsqueda */
+.searchContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Contenedor del selector de tipo */
+.selectContainer {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilo para el campo de búsqueda y el selector */
+.searchInput,
+.typeSelect {
+  width: 220px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  outline: none;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+/* Efecto al enfocar */
+.searchInput:focus,
+.typeSelect:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Estilo del selector */
+.typeSelect {
+  background-color: white;
+  color: #333;
+  cursor: pointer;
+}
+
+/* Estilo del botón de opciones */
+.ordersContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  padding: 12px;
+  background-color: #444;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.ordersContainer:hover {
+  background-color: #555;
+}
+
+/* Estilo del cuadro desplegable */
+.container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 220px;
+  background-color: white;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 10;
+  padding: 10px;
+}
+
+/* Lista de opciones */
+.orders {
+  display: flex;
+  flex-direction: column;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+/* Estilo de cada opción */
+.order {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 6px;
+  transition: background 0.3s;
+  cursor: pointer;
+  color: black;
+}
+
+.order:hover {
+  background-color: #eee;
+  font-weight: bold;
+}
+
+/* Círculo de color para cada tipo */
+.color {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  margin-right: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+
+  /* Mejor contraste en colores de los tipos */
+  .color.volver {color:#000000;}
+  .color.normal { background-color: #A8A878; border-color: #000000; color:#000000;}
+  .color.fire { background-color: #F08030; border-color: #000000; color:#000000;}
+  .color.water { background-color: #6890F0; border-color: #000000; color:#000000;}
+  .color.grass { background-color: #78C850; border-color: #000000; color:#000000;}
+  .color.electric { background-color: #F8D030; border-color: #000000; color:#000000;}
+  .color.ice { background-color: #98D8D8; border-color: #000000; color:#000000;}
+  .color.fighting { background-color: #C03028; border-color: #000000; color:#000000;}
+  .color.poison { background-color: #A040A0; border-color: #000000; color:#000000;}
+  .color.ground { background-color: #E0C068; border-color: #000000; color:#000000;}
+  .color.flying { background-color: #A890F0; border-color: #000000; color:#000000;}
+  .color.psychic { background-color: #F85888; border-color: #000000; color:#000000;}
+  .color.bug { background-color: #A8B820; border-color: #000000; color:#000000;}
+  .color.rock { background-color: #B8A038; border-color: #000000; color:#000000;}
+  .color.ghost { background-color: #705898; border-color: #000000; color:#000000;}
+  .color.dark { background-color: #705848; border-color: #000000; color:#000000;}
+  .color.steel { background-color: #B8B8D0; border-color: #000000; color:#000000;}
+  .color.fairy { background-color: #EE99AC; border-color: #000000; color:#000000;}
+  .color.dragon { background-color: #7038F8; border-color: #000000; color:#000000;}

@@ -1,0 +1,88 @@
+.types {
+  margin-top: 75px;
+  padding-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.type {
+  padding: 0.2rem 1rem;
+  border-radius: 1rem;
+  color: white;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* Estilos para los diferentes tipos de Pokémon */
+.type-fire {
+  background-color: #ffa07a;
+}
+
+.type-water {
+  background-color: #87ceeb;
+}
+
+.type-grass {
+  background-color: #98fb98;
+}
+
+.type-electric {
+  background-color: #ffd700;
+}
+
+.type-psychic {
+  background-color: #ff69b4;
+}
+
+.type-ice {
+  background-color: #add8e6;
+}
+
+.type-dragon {
+  background-color: #9370db;
+}
+
+.type-dark {
+  background-color: #696969;
+}
+
+.type-fairy {
+  background-color: #ffb6c1;
+}
+
+.type-normal {
+  background-color: #f5f5dc;
+}
+
+.type-fighting {
+  background-color: #cd853f;
+}
+
+.type-flying {
+  background-color: #b0e0e6;
+}
+
+.type-poison {
+  background-color: #da70d6;
+}
+
+.type-ground {
+  background-color: #d2b48c;
+}
+
+.type-rock {
+  background-color: #bc8f8f;
+}
+
+.type-bug {
+  background-color: #f0e68c;
+}
+
+.type-ghost {
+  background-color: #7b68ee;
+}
+
+.type-steel {
+  background-color: #b0c4de;
+}

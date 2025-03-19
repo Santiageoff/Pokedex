@@ -1,0 +1,101 @@
+/* Fondo dinámico con clases de tipo */
+.bg {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 20px;
+}
+
+/* Estilo del contenedor de la información */
+.info {
+  max-width: 650px;
+  width: 95%;
+  background-color: white;
+  height: 65vh;
+  bottom: 0;
+  position: relative;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilo de la imagen */
+.info img {
+  position: absolute;
+  top: -150px;
+  width: clamp(200px, 50%, 275px); /* Ajuste responsivo */
+  object-fit: contain;
+}
+
+/* Estilos del botón de volver */
+.backButton {
+  background-color: #ff5757;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.backButton:hover {
+  background-color: #ff2d2d;
+}
+
+/* Estilos de los tipos de Pokémon */
+.pokemonTypes {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.pokemonType {
+  background-color: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+/* Estilos de las estadísticas */
+.pokemonStats {
+  margin-top: 10px;
+}
+
+.pokemonStat {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+/* Peso y altura */
+.pokemonWeightHeight {
+  margin-top: 15px;
+  font-size: 18px;
+  text-align: center;
+}
+
+/* Mensajes de error */
+.errorMessage {
+  color: red;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Contenedor de carga */
+.loadingContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
