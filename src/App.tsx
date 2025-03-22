@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { useQuery, gql } from "@apollo/client";
-import { Outlet } from "react-router-dom";
 import Pagination from "./components/Pagination/Pagination";
 import PokemonList from "./components/PokemonList/PokemonList";
 import usePagination from "./hooks/usePagination";
 import "./App.css";
+
 interface PokeType {
   id: number;
   name: string;
@@ -40,7 +40,6 @@ const GET_ALL_POKEMON = gql`
   }
 `;
 
-
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterSelected, setFilterSelected] = useState<PokeType | null>(null);
@@ -70,21 +69,18 @@ const App: React.FC = () => {
 
   return (
     <div>
-      {/* Solo renderiza la lista de Pokémon con los filtros incluidos dentro */}
       <PokemonList
-  page={page}
-  perPage={perPage}
-  pokemonsFiltered={pokemonsFiltered}
-  isLoading={loadingPokemons}
-  types={types}
-  filterSelected={filterSelected}  
-  changeTypeSelected={changeTypeSelected}
-  searchTerm={searchTerm}
-  setSearchTerm={setSearchTerm}
-/>
+        page={page}
+        perPage={perPage}
+        pokemonsFiltered={pokemonsFiltered}
+        isLoading={loadingPokemons}
+        types={types}
+        filterSelected={filterSelected}
+        changeTypeSelected={changeTypeSelected}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
 
-
-      {/* Paginación */}
       <Pagination
         page={page}
         perPage={perPage}
@@ -92,7 +88,6 @@ const App: React.FC = () => {
         previousPage={previousPage}
         maxItems={pokemonsFiltered.length}
       />
-      <Outlet />
     </div>
   );
 };

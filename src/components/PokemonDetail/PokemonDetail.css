@@ -31,14 +31,14 @@
 /* Estilo de la imagen */
 .info img {
   position: absolute;
-  top: -150px;
+  top: -200px;
   width: clamp(200px, 50%, 275px); /* Ajuste responsivo */
   object-fit: contain;
 }
 
 /* Estilos del botón de volver */
 .backButton {
-  background-color: #ff5757;
+  background-color: #000000;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -46,11 +46,10 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-left: -570px; /* Mueve el botón 50px hacia la izquierda */
 }
 
-.backButton:hover {
-  background-color: #ff2d2d;
-}
+
 
 /* Estilos de los tipos de Pokémon */
 .pokemonTypes {

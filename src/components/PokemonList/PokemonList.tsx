@@ -1,6 +1,7 @@
 import React from "react";
 import { PokeballIconSmall } from "../../assets/pokeball";
 import Filters from "../Filters/Filters";
+import PokemonCard from "../PokemonCard/PokemonCard";
 import "./PokemonList.css";
 
 interface PokeType {
@@ -8,10 +9,16 @@ interface PokeType {
   name: string;
 }
 
+interface Pokemon {
+  id: number;
+  name: string;
+  types: PokeType[];
+}
+
 interface PokemonListProps {
   page: number;
   perPage: number;
-  pokemonsFiltered: PokeType[];
+  pokemonsFiltered: Pokemon[];
   isLoading: boolean;
   types: PokeType[];
   filterSelected: PokeType | null;
@@ -33,16 +40,17 @@ const PokemonList: React.FC<PokemonListProps> = ({
 }) => {
   const totalPages = Math.ceil(pokemonsFiltered.length / perPage);
 
-  // 🔹 Aplica el filtro antes de calcular la paginación
+  // 🔹 Filtrar Pokémon por nombre y tipo
   const filteredPokemons = pokemonsFiltered.filter((pokemon) => {
     const matchesSearch = pokemon.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesType = filterSelected ? pokemon.id === filterSelected.id : true; // Asegúrate de tener el ID correcto
+    const matchesType = filterSelected
+      ? pokemon.types.some((type) => type.id === filterSelected.id)
+      : true;
     return matchesSearch && matchesType;
   });
 
   const startIndex = (page - 1) * perPage;
   const endIndex = startIndex + perPage;
-
   const pokemonToShow =
     filteredPokemons.length > 0 && page <= totalPages
       ? filteredPokemons.slice(startIndex, endIndex)
@@ -56,16 +64,18 @@ const PokemonList: React.FC<PokemonListProps> = ({
     return (
       <div className="noResults">
         <p>No se encontraron Pokémon.</p>
-        <button className="resetButton" onClick={() => {
-          setSearchTerm("");  // Limpiar la búsqueda
-          changeTypeSelected(null); // Restablecer el filtro
-        }}>
+        <button
+          className="resetButton"
+          onClick={() => {
+            setSearchTerm(""); // Limpiar búsqueda
+            changeTypeSelected(null); // Resetear filtro
+          }}
+        >
           Volver a la lista principal
         </button>
       </div>
     );
   }
-  
 
   return (
     <div className="pokemonList">
@@ -74,29 +84,27 @@ const PokemonList: React.FC<PokemonListProps> = ({
         <h1 className="pokedex-title">Pokédex</h1>
       </header>
 
-      {/* Pasar correctamente las funciones de filtrado a Filters */}
+      {/* Filtros */}
       <div className="filtersWrapper">
         <Filters
           types={types}
           filterSelected={filterSelected}
-          changeTypeSelected={changeTypeSelected} 
+          changeTypeSelected={changeTypeSelected}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
         />
       </div>
 
+      {/* Renderizar PokémonCards */}
       <div className="pokemonGrid">
-        {pokemonToShow.map(({ id, name }) => {
-          const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
-
-          return (
-            <div key={id} className="pokemonCard">
-              <img src={imageUrl} alt={name} className="pokemonImage" />
-              <p className="pokemonName">{name}</p>
-              <p className="pokemonNumber">#{id}</p>
-            </div>
-          );
-        })}
+        {pokemonToShow.map(({ id, name, types }) => (
+          <PokemonCard
+            key={id}
+            id={id}
+            name={name}
+            types={types}
+          />
+        ))}
       </div>
     </div>
   );
