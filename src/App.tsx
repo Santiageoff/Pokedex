@@ -5,8 +5,6 @@ import Pagination from "./components/Pagination/Pagination";
 import PokemonList from "./components/PokemonList/PokemonList";
 import usePagination from "./hooks/usePagination";
 import "./App.css";
-
-
 interface PokeType {
   id: number;
   name: string;
@@ -25,6 +23,7 @@ const GET_POKEMON_BY_TYPE = gql`
   query GetPokemonByType($typeId: Int!) {
     pokemon_v2_pokemon(
       where: { pokemon_v2_pokemontypes: { type_id: { _eq: $typeId } } }
+      limit: 10  
     ) {
       id
       name
@@ -34,12 +33,13 @@ const GET_POKEMON_BY_TYPE = gql`
 
 const GET_ALL_POKEMON = gql`
   query GetAllPokemon {
-    pokemon_v2_pokemon {
+    pokemon_v2_pokemon(limit: 10) { 
       id
       name
     }
   }
 `;
+
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -72,16 +72,16 @@ const App: React.FC = () => {
     <div>
       {/* Solo renderiza la lista de Pokémon con los filtros incluidos dentro */}
       <PokemonList
-        page={page}
-        perPage={perPage}
-        pokemonsFiltered={pokemonsFiltered}
-        isLoading={loadingPokemons}
-        types={types}
-        filterSelected={filterSelected}  
-        changeTypeSelected={changeTypeSelected}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-      />
+  page={page}
+  perPage={perPage}
+  pokemonsFiltered={pokemonsFiltered}
+  isLoading={loadingPokemons}
+  types={types}
+  filterSelected={filterSelected}  
+  changeTypeSelected={changeTypeSelected}
+  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}
+/>
 
 
       {/* Paginación */}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Filters.css";
 
 interface PokeType {
@@ -14,20 +14,6 @@ interface FiltersProps {
   setSearchTerm: (term: string) => void;
 }
 
-const FiltersIcon = ({ ...props }) => {
-  return (
-    <svg {...props} width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path
-        d="M19.5 9L12 16.5L4.5 9"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-};
-
 const Filters: React.FC<FiltersProps> = ({
   types,
   filterSelected,
@@ -35,9 +21,11 @@ const Filters: React.FC<FiltersProps> = ({
   searchTerm,
   setSearchTerm,
 }) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
     <div className="filtersContainer">
-      {/* Campo de búsqueda estilizado */}
+      {/* Campo de búsqueda */}
       <div className="searchContainer">
         <input
           type="text"
@@ -48,25 +36,48 @@ const Filters: React.FC<FiltersProps> = ({
         />
       </div>
 
-      {/* Selector de tipo estilizado */}
-      <div className="selectContainer">
-        <FiltersIcon className="filterIcon" />
-        <select
-          className="typeSelect"
-          value={filterSelected?.id || ""}
-          onChange={(e) =>
-            changeTypeSelected(
-              e.target.value ? types.find((type) => type.id === Number(e.target.value)) || null : null
-            )
-          }
+      {/* Selector de tipo personalizado */}
+      <div className="dropdown">
+        <button
+          className="dropdownButton"
+          onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         >
-          <option value="">Todos los tipos</option>
-          {types.map((type) => (
-            <option key={type.id} value={type.id}>
-              {type.name}
-            </option>
-          ))}
-        </select>
+          {filterSelected ? (
+            <>
+              <span className={`color-circle ${filterSelected.name.toLowerCase()}`}></span>
+              {filterSelected.name}
+            </>
+          ) : (
+            "Seleccione un tipo"
+          )}
+        </button>
+
+        {isDropdownOpen && (
+          <ul className="dropdownMenu">
+            <li
+              className="dropdownItem"
+              onClick={() => {
+                changeTypeSelected(null);
+                setIsDropdownOpen(false);
+              }}
+            >
+              <span className="color-circle default"></span> Todos los tipos
+            </li>
+            {types.map((type) => (
+              <li
+                key={type.id}
+                className="dropdownItem"
+                onClick={() => {
+                  changeTypeSelected(type);
+                  setIsDropdownOpen(false);
+                }}
+              >
+                <span className={`color-circle ${type.name.toLowerCase()}`}></span>
+                {type.name}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );

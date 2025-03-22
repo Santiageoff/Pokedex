@@ -101,6 +101,22 @@
   color: #777;
 }
 
+.resetButton {
+  background-color: #ffffff;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.resetButton:hover {
+  background-color: #ffaa00;
+}
+
 /* Responsividad */
 @media (max-width: 1000px) {
   .pokemonGrid {
