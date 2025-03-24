@@ -60,40 +60,56 @@ const App: React.FC = () => {
   const [filterSelected, setFilterSelected] = useState<PokeType | null>(null);
   const { page, nextPage, previousPage, itemsPerPage } = usePagination(12);
 
-  // Usamos debounce para actualizar la búsqueda después de 500ms
+  // 🔄 Debounce para evitar múltiples peticiones en tiempo real
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchTerm);
     }, 500);
-
     return () => clearTimeout(handler);
+  }, [searchTerm]);
+
+  // 🔥 Si el usuario empieza a buscar, reseteamos el filtro de tipo
+  useEffect(() => {
+    if (searchTerm) {
+      setFilterSelected(null);
+    }
   }, [searchTerm]);
 
   // Obtener tipos de Pokémon
   const { data: typesData } = useQuery(GET_POKEMON_TYPES);
-  const types = typesData?.pokemon_v2_type || [];
+  const rawTypes: PokeType[] = typesData?.pokemon_v2_type || [];
 
-  // Definir la consulta adecuada según el filtro y la búsqueda
+  // Filtrar tipos inválidos 
+  const filteredTypes = rawTypes.filter((type: PokeType) => 
+    !["stellar", "unknown", "shadow"].includes(type.name)
+  );
+
+  // 🔥 Lógica para determinar qué consulta usar
   let query = GET_ALL_POKEMON;
-  let variables: any = { limit: itemsPerPage, offset: (page - 1) * itemsPerPage };
+  let variables: { limit: number; offset: number; typeId?: number; name?: string } = {
+    limit: itemsPerPage,
+    offset: (page - 1) * itemsPerPage,
+  };
 
-  if (filterSelected) {
-    query = GET_POKEMON_BY_TYPE;
-    variables = { ...variables, typeId: filterSelected.id };
-  } else if (debouncedSearch) {
+  if (debouncedSearch) {
+    // Si hay una búsqueda, ignoramos el filtro de tipo
     query = GET_POKEMON_BY_NAME;
     variables = { ...variables, name: `%${debouncedSearch}%` };
+  } else if (filterSelected) {
+    // Si no hay búsqueda, pero sí filtro de tipo, usamos esta consulta
+    query = GET_POKEMON_BY_TYPE;
+    variables = { ...variables, typeId: filterSelected.id };
   }
 
   const { data: pokemonData, loading: loadingPokemons } = useQuery(query, {
     variables,
-    skip: filterSelected === null && query === GET_POKEMON_BY_TYPE, // Evita errores cuando no hay tipo seleccionado
   });
 
   const pokemons = pokemonData?.pokemon_v2_pokemon || [];
 
   const changeTypeSelected = (type: PokeType | null) => {
     setFilterSelected(type);
+    setSearchTerm(""); // 🔥 Limpiamos la búsqueda si cambia el filtro
   };
 
   return (
@@ -103,7 +119,7 @@ const App: React.FC = () => {
         perPage={itemsPerPage}
         pokemonsFiltered={pokemons}
         isLoading={loadingPokemons}
-        types={types}
+        types={filteredTypes} 
         filterSelected={filterSelected}
         changeTypeSelected={changeTypeSelected}
         searchTerm={searchTerm}
@@ -115,7 +131,7 @@ const App: React.FC = () => {
         perPage={itemsPerPage}
         nextPage={nextPage}
         previousPage={previousPage}
-        maxItems={1000} // Si la API da un total, cámbialo aquí
+        maxItems={1000} 
       />
     </div>
   );
