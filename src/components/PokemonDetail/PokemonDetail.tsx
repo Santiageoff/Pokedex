@@ -92,7 +92,10 @@ const PokemonDetail: React.FC = () => {
     return <div className="errorMessage">No se encontró el Pokémon</div>;
   }
 
-  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+  // URL de la imagen en alta resolución
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
+
+  // Clase CSS para el tipo de Pokémon
   const typeClass = pokemon.pokemon_v2_pokemontypes?.[0]?.pokemon_v2_type.name || "normal";
 
   // Obtener la página de origen (por defecto, vuelve a la página 1)
@@ -108,6 +111,7 @@ const PokemonDetail: React.FC = () => {
         <img
           src={imageUrl}
           alt={`Imagen de ${pokemon.name}`}
+          className="pokemonImage"
           onError={(e) => (e.currentTarget.src = "/fallback.png")}
         />
         <h1>{pokemon.name}</h1>

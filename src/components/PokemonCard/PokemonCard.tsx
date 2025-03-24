@@ -22,10 +22,13 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, types = [] }) => {
     navigate(`/pokemon/${id}`);
   };
 
+  // URL de la imagen en alta resolución
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+
   return (
     <div className={`pokemonCard ${typeClass}`} onClick={handleClick} style={{ cursor: "pointer" }}>
       <img
-        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
+        src={imageUrl}
         alt={name}
         className="pokemonImage"
         onError={(e) => (e.currentTarget.src = "/fallback.png")}

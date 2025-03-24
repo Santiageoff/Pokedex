@@ -16,8 +16,7 @@
   max-width: 650px;
   width: 95%;
   background-color: white;
-  height: 65vh;
-  bottom: 0;
+  min-height: 65vh; /* Cambiado a min-height para mejor adaptación */
   position: relative;
   margin-bottom: 1rem;
   border-radius: 8px;
@@ -26,6 +25,7 @@
   align-items: center;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: visible; /* Permite que la imagen sobresalga */
 }
 
 /* Estilo de la imagen */
@@ -33,7 +33,10 @@
   position: absolute;
   top: -200px;
   width: clamp(200px, 50%, 275px); /* Ajuste responsivo */
-  object-fit: contain;
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: contain; /* Evita que la imagen se distorsione */
+  image-rendering: -webkit-optimize-contrast; /* Mejora la calidad en navegadores WebKit */
+  image-rendering: crisp-edges; /* Mejora la calidad en otros navegadores */
 }
 
 /* Estilos del botón de volver */
@@ -49,7 +52,9 @@
   margin-left: -570px; /* Mueve el botón 50px hacia la izquierda */
 }
 
-
+.backButton:hover {
+  background-color: #333; /* Efecto hover para el botón */
+}
 
 /* Estilos de los tipos de Pokémon */
 .pokemonTypes {
@@ -64,16 +69,24 @@
   border-radius: 5px;
   text-transform: capitalize;
   font-weight: bold;
+  color: #333; /* Color de texto para mejor contraste */
 }
 
 /* Estilos de las estadísticas */
 .pokemonStats {
   margin-top: 10px;
+  width: 100%; /* Ocupa todo el ancho del contenedor */
 }
 
 .pokemonStat {
   margin: 5px 0;
   font-size: 16px;
+  display: flex;
+  justify-content: space-between; /* Alinea el nombre y el valor de la estadística */
+}
+
+.pokemonStat strong {
+  font-weight: bold;
 }
 
 /* Peso y altura */
@@ -81,6 +94,7 @@
   margin-top: 15px;
   font-size: 18px;
   text-align: center;
+  width: 100%; /* Ocupa todo el ancho del contenedor */
 }
 
 /* Mensajes de error */
