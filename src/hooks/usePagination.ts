@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const usePagination = (itemsPerPage: number, maxItems?: number) => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const storedPage = Number(localStorage.getItem("currentPage")) || 1;
+  const [currentPage, setCurrentPage] = useState(storedPage);
+
+  useEffect(() => {
+    localStorage.setItem("currentPage", currentPage.toString());
+  }, [currentPage]);
 
   const maxPages = maxItems ? Math.ceil(maxItems / itemsPerPage) : undefined;
 

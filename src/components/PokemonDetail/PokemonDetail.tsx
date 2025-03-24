@@ -1,10 +1,9 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import "./PokemonDetail.css";
 
-// Definición de interfaces
 interface PokemonType {
   pokemon_v2_type: {
     name: string;
@@ -34,7 +33,6 @@ interface PokemonDetails {
   pokemon_v2_pokemonabilities: PokemonAbility[];
 }
 
-// Consulta GraphQL
 const GET_POKEMON_DETAILS = gql`
   query GetPokemonDetails($id: Int!) {
     pokemon_v2_pokemon_by_pk(id: $id) {
@@ -64,6 +62,7 @@ const GET_POKEMON_DETAILS = gql`
 
 const PokemonDetail: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { id } = useParams<{ id?: string }>();
 
   const pokemonId = id ? parseInt(id) : null;
@@ -71,7 +70,6 @@ const PokemonDetail: React.FC = () => {
     return <div className="errorMessage">Error: ID inválido</div>;
   }
 
-  // Consulta GraphQL
   const { data, loading, error } = useQuery<{ pokemon_v2_pokemon_by_pk: PokemonDetails }>(
     GET_POKEMON_DETAILS,
     { variables: { id: pokemonId } }
@@ -97,9 +95,12 @@ const PokemonDetail: React.FC = () => {
   const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
   const typeClass = pokemon.pokemon_v2_pokemontypes?.[0]?.pokemon_v2_type.name || "normal";
 
+  // Obtener la página de origen (por defecto, vuelve a la página 1)
+  const fromPage = location.state?.fromPage || 1;
+
   return (
     <div className={`bg type-${typeClass}`}>
-      <button onClick={() => navigate("/", { replace: true })} className="backButton">
+      <button onClick={() => navigate(`/?page=${fromPage}`)} className="backButton">
         ← Volver
       </button>
 
@@ -112,7 +113,6 @@ const PokemonDetail: React.FC = () => {
         <h1>{pokemon.name}</h1>
         <p>#{pokemon.id}</p>
 
-        {/* Tipos del Pokémon */}
         <div className="pokemonTypes">
           {pokemon.pokemon_v2_pokemontypes.map((type: PokemonType) => (
             <span key={type.pokemon_v2_type.name} className="pokemonType">
@@ -121,7 +121,6 @@ const PokemonDetail: React.FC = () => {
           ))}
         </div>
 
-        {/* Estadísticas */}
         <div className="pokemonStats">
           {pokemon.pokemon_v2_pokemonstats.map((stat: PokemonStat) => (
             <div key={stat.pokemon_v2_stat.name} className="pokemonStat">
@@ -130,7 +129,6 @@ const PokemonDetail: React.FC = () => {
           ))}
         </div>
 
-        {/* Peso y Altura */}
         <div className="pokemonWeightHeight">
           <p>Peso: {pokemon.weight / 10} kg</p>
           <p>Altura: {pokemon.height / 10} m</p>

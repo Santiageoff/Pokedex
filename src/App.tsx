@@ -60,7 +60,7 @@ const App: React.FC = () => {
   const [filterSelected, setFilterSelected] = useState<PokeType | null>(null);
   const { page, nextPage, previousPage, itemsPerPage } = usePagination(12);
 
-  // 🔄 Debounce para evitar múltiples peticiones en tiempo real
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchTerm);
@@ -68,7 +68,7 @@ const App: React.FC = () => {
     return () => clearTimeout(handler);
   }, [searchTerm]);
 
-  // 🔥 Si el usuario empieza a buscar, reseteamos el filtro de tipo
+  
   useEffect(() => {
     if (searchTerm) {
       setFilterSelected(null);
@@ -84,7 +84,7 @@ const App: React.FC = () => {
     !["stellar", "unknown", "shadow"].includes(type.name)
   );
 
-  // 🔥 Lógica para determinar qué consulta usar
+
   let query = GET_ALL_POKEMON;
   let variables: { limit: number; offset: number; typeId?: number; name?: string } = {
     limit: itemsPerPage,
@@ -109,7 +109,7 @@ const App: React.FC = () => {
 
   const changeTypeSelected = (type: PokeType | null) => {
     setFilterSelected(type);
-    setSearchTerm(""); // 🔥 Limpiamos la búsqueda si cambia el filtro
+    setSearchTerm(""); 
   };
 
   return (

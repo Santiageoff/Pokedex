@@ -2,38 +2,46 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./PokemonCard.css";
 
-// Definición de interfaz para los props
 interface PokemonCardProps {
   id: number;
   name: string;
-  types?: { name: string }[]; // Hacemos types opcional
+  types?: { name: string }[];
 }
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, types = [] }) => {
   const navigate = useNavigate();
-  const typeClass = types.length > 0 ? types[0].name : "normal"; // Primer tipo o 'normal'
+
+  // Verifica los tipos que se están pasando
+  console.log("Types recibidos en PokemonCard:", types);
+
+  // Obtener la clase del primer tipo o "normal" si no tiene
+  const typeClass = types.length > 0 ? `type-${types[0].name.toLowerCase()}` : "type-normal";
 
   const handleClick = () => {
-    console.log(`Click en Pokémon #${id} - ${name}`); // Debug para verificar que el evento se activa
+    console.log(`Click en Pokémon #${id} - ${name}`);
     navigate(`/pokemon/${id}`);
   };
 
   return (
-    <div className={`pokemonCard type-${typeClass}`} onClick={handleClick} style={{ cursor: "pointer" }}>
+    <div className={`pokemonCard ${typeClass}`} onClick={handleClick} style={{ cursor: "pointer" }}>
       <img
         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
         alt={name}
         className="pokemonImage"
-        onError={(e) => (e.currentTarget.src = "/fallback.png")} // Imagen alternativa si falla
+        onError={(e) => (e.currentTarget.src = "/fallback.png")}
       />
       <h3 className="pokemonName">{name}</h3>
       <p className="pokemonNumber">#{id}</p>
       <div className="pokemonTypes">
-        {types.map((type) => (
-          <span key={type.name} className="pokemonType">
-            {type.name}
-          </span>
-        ))}
+        {types.length > 0 ? (
+          types.map((type) => (
+            <span key={type.name} className={`pokemonType type-${type.name.toLowerCase()}`}>
+              {type.name}
+            </span>
+          ))
+        ) : (
+          <span className="pokemonType type-normal">Normal</span>
+        )}
       </div>
     </div>
   );
