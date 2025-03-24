@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery, gql } from "@apollo/client";
 import Pagination from "./components/Pagination/Pagination";
 import PokemonList from "./components/PokemonList/PokemonList";
@@ -20,10 +20,11 @@ const GET_POKEMON_TYPES = gql`
 `;
 
 const GET_POKEMON_BY_TYPE = gql`
-  query GetPokemonByType($typeId: Int!) {
+  query GetPokemonByType($typeId: Int!, $limit: Int!, $offset: Int!) {
     pokemon_v2_pokemon(
       where: { pokemon_v2_pokemontypes: { type_id: { _eq: $typeId } } }
-      limit: 10  
+      limit: $limit
+      offset: $offset
     ) {
       id
       name
@@ -32,8 +33,21 @@ const GET_POKEMON_BY_TYPE = gql`
 `;
 
 const GET_ALL_POKEMON = gql`
-  query GetAllPokemon {
-    pokemon_v2_pokemon(limit: 10) { 
+  query GetAllPokemon($limit: Int!, $offset: Int!) {
+    pokemon_v2_pokemon(limit: $limit, offset: $offset) {
+      id
+      name
+    }
+  }
+`;
+
+const GET_POKEMON_BY_NAME = gql`
+  query GetPokemonByName($name: String!, $limit: Int!, $offset: Int!) {
+    pokemon_v2_pokemon(
+      where: { name: { _ilike: $name } }
+      limit: $limit
+      offset: $offset
+    ) {
       id
       name
     }
@@ -42,37 +56,52 @@ const GET_ALL_POKEMON = gql`
 
 const App: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState(searchTerm);
   const [filterSelected, setFilterSelected] = useState<PokeType | null>(null);
+  const { page, nextPage, previousPage, itemsPerPage } = usePagination(12);
 
+  // Usamos debounce para actualizar la búsqueda después de 500ms
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedSearch(searchTerm);
+    }, 500);
+
+    return () => clearTimeout(handler);
+  }, [searchTerm]);
+
+  // Obtener tipos de Pokémon
   const { data: typesData } = useQuery(GET_POKEMON_TYPES);
   const types = typesData?.pokemon_v2_type || [];
 
-  const query = filterSelected ? GET_POKEMON_BY_TYPE : GET_ALL_POKEMON;
+  // Definir la consulta adecuada según el filtro y la búsqueda
+  let query = GET_ALL_POKEMON;
+  let variables: any = { limit: itemsPerPage, offset: (page - 1) * itemsPerPage };
+
+  if (filterSelected) {
+    query = GET_POKEMON_BY_TYPE;
+    variables = { ...variables, typeId: filterSelected.id };
+  } else if (debouncedSearch) {
+    query = GET_POKEMON_BY_NAME;
+    variables = { ...variables, name: `%${debouncedSearch}%` };
+  }
+
   const { data: pokemonData, loading: loadingPokemons } = useQuery(query, {
-    variables: filterSelected ? { typeId: filterSelected.id } : undefined,
+    variables,
+    skip: filterSelected === null && query === GET_POKEMON_BY_TYPE, // Evita errores cuando no hay tipo seleccionado
   });
 
   const pokemons = pokemonData?.pokemon_v2_pokemon || [];
-
-  const pokemonsFiltered = useMemo(() => {
-    return pokemons.filter((pokemon: PokeType) =>
-      pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  }, [pokemons, searchTerm]);
 
   const changeTypeSelected = (type: PokeType | null) => {
     setFilterSelected(type);
   };
 
-  const { page, nextPage, previousPage } = usePagination();
-  const perPage = 12;
-
   return (
     <div>
       <PokemonList
         page={page}
-        perPage={perPage}
-        pokemonsFiltered={pokemonsFiltered}
+        perPage={itemsPerPage}
+        pokemonsFiltered={pokemons}
         isLoading={loadingPokemons}
         types={types}
         filterSelected={filterSelected}
@@ -83,10 +112,10 @@ const App: React.FC = () => {
 
       <Pagination
         page={page}
-        perPage={perPage}
+        perPage={itemsPerPage}
         nextPage={nextPage}
         previousPage={previousPage}
-        maxItems={pokemonsFiltered.length}
+        maxItems={1000} // Si la API da un total, cámbialo aquí
       />
     </div>
   );

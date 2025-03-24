@@ -28,12 +28,10 @@ interface Props {
 }
 
 export const BaseStats = ({ pokemonId, backgroundSelected }: Props) => {
-  const { data, loading, error } = useQuery(GET_POKEMON_STATS, {
+  const { data } = useQuery(GET_POKEMON_STATS, {
     variables: { id: pokemonId },
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
 
   const pokemon = data.pokemon;
   const maxStat = 255;

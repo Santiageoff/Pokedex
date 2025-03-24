@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-export const usePagination = (maxPages?: number) => {
+export const usePagination = (itemsPerPage: number, maxItems?: number) => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  const maxPages = maxItems ? Math.ceil(maxItems / itemsPerPage) : undefined;
+
   const nextPage = () => {
-    setCurrentPage((prevPage) => (maxPages ? Math.min(prevPage + 1, maxPages) : prevPage + 1));
+    setCurrentPage((prevPage) =>
+      maxPages ? Math.min(prevPage + 1, maxPages) : prevPage + 1
+    );
   };
 
   const previousPage = () => {
@@ -27,6 +31,7 @@ export const usePagination = (maxPages?: number) => {
     previousPage,
     backToHome,
     changePage,
+    itemsPerPage,
   };
 };
 

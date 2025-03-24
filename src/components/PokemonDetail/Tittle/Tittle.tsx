@@ -1,5 +1,5 @@
 import { useQuery, gql } from "@apollo/client";
-import "./Title.css"; // ✅ Ahora apunta al archivo CSS correcto
+import "./Title.css"; 
 
 const GET_POKEMON_TYPE = gql`
   query GetPokemonType($id: ID!) {
@@ -20,13 +20,11 @@ interface Props {
 }
 
 export const Title = ({ content, backgroundSelected, pokemonId }: Props) => {
-  const { data, loading, error } = useQuery(GET_POKEMON_TYPE, {
+  const { data } = useQuery(GET_POKEMON_TYPE, {
     variables: { id: pokemonId },
     skip: !pokemonId,
   });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
 
   const pokemon = data?.pokemon;
 
