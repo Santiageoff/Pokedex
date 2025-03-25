@@ -114,28 +114,44 @@ const PokemonDetail: React.FC = () => {
           className="pokemonImage"
           onError={(e) => (e.currentTarget.src = "/fallback.png")}
         />
-        <h1>{pokemon.name}</h1>
+
+        {/* Nombre del Pokémon con la primera letra en mayúscula */}
+        <h1 className="pokemonName">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
         <p>#{pokemon.id}</p>
 
+        {/* Tipos de Pokémon */}
         <div className="pokemonTypes">
-          {pokemon.pokemon_v2_pokemontypes.map((type: PokemonType) => (
+          {pokemon.pokemon_v2_pokemontypes.map((type) => (
             <span key={type.pokemon_v2_type.name} className="pokemonType">
               {type.pokemon_v2_type.name}
             </span>
           ))}
         </div>
 
+        {/* Estadísticas con barras de progreso */}
         <div className="pokemonStats">
-          {pokemon.pokemon_v2_pokemonstats.map((stat: PokemonStat) => (
-            <div key={stat.pokemon_v2_stat.name} className="pokemonStat">
-              <strong>{stat.pokemon_v2_stat.name}:</strong> {stat.base_stat}
-            </div>
-          ))}
+          {pokemon.pokemon_v2_pokemonstats.map((stat) => {
+            const percentage = (stat.base_stat / 150) * 100; // Escala a 100% basado en 150 como máximo
+            return (
+              <div key={stat.pokemon_v2_stat.name} className="pokemonStat">
+                <strong>{stat.pokemon_v2_stat.name}:</strong>
+                <div className="statBar">
+                  <div
+                    className={`statFill ${stat.pokemon_v2_stat.name}`}
+                    style={{ width: `${percentage}%` }}
+                  >
+                    {stat.base_stat}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
+        {/* Peso y altura con nuevo diseño */}
         <div className="pokemonWeightHeight">
-          <p>Peso: {pokemon.weight / 10} kg</p>
-          <p>Altura: {pokemon.height / 10} m</p>
+          <div className="weight">Peso: {pokemon.weight / 10} kg</div>
+          <div className="height">Altura: {pokemon.height / 10} m</div>
         </div>
       </div>
     </div>

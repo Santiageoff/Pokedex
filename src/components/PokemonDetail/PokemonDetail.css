@@ -1,4 +1,6 @@
-/* Fondo dinámico con clases de tipo */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 📌 Fondo dinámico */
 .bg {
   min-height: 100vh;
   width: 100%;
@@ -11,12 +13,12 @@
   padding-top: 20px;
 }
 
-/* Estilo del contenedor de la información */
+/* 📌 Contenedor de información */
 .info {
   max-width: 650px;
   width: 95%;
   background-color: white;
-  min-height: 65vh; /* Cambiado a min-height para mejor adaptación */
+  min-height: 65vh;
   position: relative;
   margin-bottom: 1rem;
   border-radius: 8px;
@@ -25,21 +27,53 @@
   align-items: center;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  overflow: visible; /* Permite que la imagen sobresalga */
+  overflow: visible;
 }
 
-/* Estilo de la imagen */
+/* 📌 Ajuste del nombre del Pokémon en la carta */
+.info .pokemonName {
+  font-size: clamp(16px, 2.5vw, 2rem);
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-top: 40px;
+  text-align: center;
+  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  max-width: 100%;
+  text-wrap: balance;
+}
+
+/* 📌 Ajuste del nombre del Pokémon en la lista */
+.pokemonList .pokemonName {
+  font-size: clamp(12px, 1.8vw, 1.5rem);
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: center;
+  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  max-width: 100%;
+}
+
+/* 📌 Ajuste del número del Pokémon */
+.pokemonNumber {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+  font-family: 'Press Start 2P', cursive;
+}
+
+/* 📌 Estilos de la imagen */
 .info img {
   position: absolute;
   top: -200px;
-  width: clamp(200px, 50%, 275px); /* Ajuste responsivo */
-  height: auto; /* Mantiene la proporción de la imagen */
-  object-fit: contain; /* Evita que la imagen se distorsione */
-  image-rendering: -webkit-optimize-contrast; /* Mejora la calidad en navegadores WebKit */
-  image-rendering: crisp-edges; /* Mejora la calidad en otros navegadores */
+  width: clamp(200px, 50%, 275px);
+  height: auto;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
-/* Estilos del botón de volver */
+/* 📌 Estilos del botón de volver */
 .backButton {
   background-color: #000000;
   color: white;
@@ -49,18 +83,20 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s ease;
-  margin-left: -570px; /* Mueve el botón 50px hacia la izquierda */
+  margin-left: -570px;
 }
 
 .backButton:hover {
-  background-color: #333; /* Efecto hover para el botón */
+  background-color: #333;
 }
 
-/* Estilos de los tipos de Pokémon */
+/* 📌 Ajuste de los tipos de Pokémon */
 .pokemonTypes {
   display: flex;
   gap: 10px;
   margin: 10px 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .pokemonType {
@@ -69,35 +105,91 @@
   border-radius: 5px;
   text-transform: capitalize;
   font-weight: bold;
-  color: #333; /* Color de texto para mejor contraste */
+  color: #333;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  max-width: 100%;
 }
 
-/* Estilos de las estadísticas */
+/* 📌 Ajuste de las estadísticas */
 .pokemonStats {
   margin-top: 10px;
-  width: 100%; /* Ocupa todo el ancho del contenedor */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pokemonStat {
-  margin: 5px 0;
+  width: 100%;
+  text-align: center;
   font-size: 16px;
-  display: flex;
-  justify-content: space-between; /* Alinea el nombre y el valor de la estadística */
+  font-family: 'Press Start 2P', cursive;
+  margin: 8px 0;
 }
 
 .pokemonStat strong {
+  display: block;
   font-weight: bold;
+  text-transform: capitalize;
+  margin-bottom: 5px;
 }
 
-/* Peso y altura */
+/* 📌 Barra de progreso debajo del título */
+.statBar {
+  width: 100%;
+  height: 12px;
+  background-color: #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 3px;
+}
+
+/* 📌 Colores según el valor de la estadística */
+.statFill {
+  height: 100%;
+  border-radius: 5px;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: width 0.5s ease-in-out;
+}
+
+.statFill.hp { background-color: #ff5959; }
+.statFill.attack { background-color: #f5ac78; }
+.statFill.defense { background-color: #fae078; }
+.statFill.speed { background-color: #ffcb05; }
+.statFill.special-attack { background-color: #6890F0; } /* Azul más oscuro */
+.statFill.special-defense { background-color: #78C850; } /* Verde diferente */
+
+/* 📌 Peso y altura */
 .pokemonWeightHeight {
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 18px;
   text-align: center;
-  width: 100%; /* Ocupa todo el ancho del contenedor */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-family: 'Press Start 2P', cursive;
 }
 
-/* Mensajes de error */
+.weight, .height {
+  background: linear-gradient(135deg, #ffcb05, #ff5959);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 📌 Mensajes de error */
 .errorMessage {
   color: red;
   font-size: 18px;
@@ -105,7 +197,7 @@
   margin-top: 20px;
 }
 
-/* Contenedor de carga */
+/* 📌 Contenedor de carga */
 .loadingContainer {
   min-height: 100vh;
   display: flex;

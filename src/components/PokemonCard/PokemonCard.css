@@ -1,16 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* 📌 Estilos de la tarjeta de Pokémon */
 .pokemonCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  width: 200px;
-  height: 250px;
+  width: 380px;  /* 🔹 Más ancho para que entren los nombres largos */
+  height: 320px; /* 🔹 Mantiene altura */
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
+  background-color: white;
 }
 
 .pokemonCard:hover {
@@ -18,107 +22,71 @@
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
+/* 📌 Ajuste de la imagen del Pokémon */
 .pokemonImage {
-  width: 110px;
-  height: 110px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
 }
 
+/* 📌 Ajuste del nombre del Pokémon en la tarjeta */
 .pokemonName {
-  font-size: 18px;
+  font-size: clamp(14px, 2vw, 20px); /* 🔹 Se adapta al tamaño de la pantalla */
   font-weight: bold;
   text-transform: capitalize;
-  color: #fff;
+  color: #000000;
+  text-align: center;
+  max-width: 100%;
+  white-space: nowrap; /* 🔹 Evita que el texto baje a otra línea */
+  overflow: visible; /* 🔹 Asegura que se vea todo */
+  font-family: 'Press Start 2P', cursive;
+  padding: 0 10px; /* 🔹 Espaciado lateral */
 }
 
+/* 📌 Ajuste del número del Pokémon */
 .pokemonNumber {
-  font-size: 14px;
-  color: #fff;
+  font-size: 16px;
+  color: #000000;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
 }
 
+/* 📌 Ajuste de los tipos de Pokémon */
 .pokemonTypes {
   display: flex;
-  gap: 5px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
   margin-top: 10px;
 }
 
 .pokemonType {
-  padding: 5px 10px;
-  border-radius: 10px;
+  padding: 6px 14px;
+  border-radius: 12px;
   font-size: 14px;
   font-weight: bold;
   color: #fff;
+  text-align: center;
+  font-family: 'Press Start 2P', cursive;
+  max-width: 100px;
 }
 
-/* Estilos para cada tipo de Pokémon con mejor contraste */
-.type-normal {
-  background: linear-gradient(135deg, #b8b89f, #8c8c7c);
-}
-
-.type-fire {
-  background: linear-gradient(135deg, #ff9c54, #e36422);
-}
-
-.type-water {
-  background: linear-gradient(135deg, #76befe, #3b8ef3);
-}
-
-.type-electric {
-  background: linear-gradient(135deg, #fcdc3a, #e0b300);
-}
-
-.type-grass {
-  background: linear-gradient(135deg, #7ac74c, #4b9c30);
-}
-
-.type-ice {
-  background: linear-gradient(135deg, #96d9d6, #62b6b3);
-}
-
-.type-fighting {
-  background: linear-gradient(135deg, #c22e28, #9e1d1a);
-}
-
-.type-poison {
-  background: linear-gradient(135deg, #a33ea1, #7c2c7c);
-}
-
-.type-ground {
-  background: linear-gradient(135deg, #e2bf65, #b8973e);
-}
-
-.type-flying {
-  background: linear-gradient(135deg, #a98ff3, #7c65d1);
-}
-
-.type-psychic {
-  background: linear-gradient(135deg, #f95587, #d0356b);
-}
-
-.type-bug {
-  background: linear-gradient(135deg, #a6b91a, #7f8d12);
-}
-
-.type-rock {
-  background: linear-gradient(135deg, #b6a136, #8e7b2b);
-}
-
-.type-ghost {
-  background: linear-gradient(135deg, #735797, #554076);
-}
-
-.type-dragon {
-  background: linear-gradient(135deg, #6f35fc, #5227cc);
-}
-
-.type-dark {
-  background: linear-gradient(135deg, #705746, #503e30);
-}
-
-.type-steel {
-  background: linear-gradient(135deg, #b7b7ce, #8d8d9f);
-}
-
-.type-fairy {
-  background: linear-gradient(135deg, #d685ad, #b16489);
-}
+/* 📌 Mejor contraste de colores por tipo */
+.type-normal { background: linear-gradient(135deg, #b8b89f, #8c8c7c); }
+.type-fire { background: linear-gradient(135deg, #ff9c54, #e36422); }
+.type-water { background: linear-gradient(135deg, #76befe, #3b8ef3); }
+.type-electric { background: linear-gradient(135deg, #fcdc3a, #e0b300); }
+.type-grass { background: linear-gradient(135deg, #7ac74c, #4b9c30); }
+.type-ice { background: linear-gradient(135deg, #96d9d6, #62b6b3); }
+.type-fighting { background: linear-gradient(135deg, #c22e28, #9e1d1a); }
+.type-poison { background: linear-gradient(135deg, #a33ea1, #7c2c7c); }
+.type-ground { background: linear-gradient(135deg, #e2bf65, #b8973e); }
+.type-flying { background: linear-gradient(135deg, #a98ff3, #7c65d1); }
+.type-psychic { background: linear-gradient(135deg, #f95587, #d0356b); }
+.type-bug { background: linear-gradient(135deg, #a6b91a, #7f8d12); }
+.type-rock { background: linear-gradient(135deg, #b6a136, #8e7b2b); }
+.type-ghost { background: linear-gradient(135deg, #735797, #554076); }
+.type-dragon { background: linear-gradient(135deg, #6f35fc, #5227cc); }
+.type-dark { background: linear-gradient(135deg, #705746, #503e30); }
+.type-steel { background: linear-gradient(135deg, #b7b7ce, #8d8d9f); }
+.type-fairy { background: linear-gradient(135deg, #d685ad, #b16489); }
