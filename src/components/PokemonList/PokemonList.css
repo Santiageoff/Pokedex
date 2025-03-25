@@ -5,13 +5,14 @@
   color: #222;
   min-height: 100vh;
   
-  /* Fondo dinámico desde imagen local */
-  background-image: url('/Fondo Pantalla Pokedex.jpg'); /* Cambia esta ruta */
+  /* Aplica un degradado transparente sobre la imagen */
+  background: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25)), 
+              url('/Fondo Pantalla Pokedex.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  transition: background-image 0.5s ease-in-out;
 }
+
 
 /* Contenedor de carga de imagen */
 .uploadContainer {
@@ -43,12 +44,12 @@
 }
 
 .pokeball-icon {
-  width: 40px;
-  height: 40px;
+  width: 80px;
+  height: 80px;
 }
 
 .pokedex-title {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bold;
   color: #000000;
   text-transform: uppercase;
@@ -89,13 +90,14 @@
 
 /* Tarjeta de cada Pokémon */
 .pokemonCard {
+  position: relative; 
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 10px;
   padding: 1rem;
   text-decoration: none;
   color: #222;
-  width: 150px;
+  width: 350px;
   text-align: center;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
@@ -118,8 +120,12 @@
 }
 
 .pokemonNumber {
+  position: absolute;
+  top: 10px;   /* Distancia desde la parte superior */
+  left: 10px;  /* Distancia desde la izquierda */
   font-size: 0.9rem;
   color: #000000;
+  font-weight: bold; /* Para mejor visibilidad */
 }
 
 .resetButton {
