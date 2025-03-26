@@ -36,7 +36,7 @@ const Filters: React.FC<FiltersProps> = ({
         />
       </div>
 
-      {/* Selector de tipo personalizado */}
+      {/* Selector de tipo */}
       <div className="dropdown">
         <button
           className="dropdownButton"

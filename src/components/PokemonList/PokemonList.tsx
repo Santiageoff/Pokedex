@@ -16,8 +16,6 @@ interface Pokemon {
 }
 
 interface PokemonListProps {
-  page: number;
-  perPage: number;
   pokemonsFiltered: Pokemon[];
   isLoading: boolean;
   types: PokeType[];
@@ -39,34 +37,40 @@ const PokemonList: React.FC<PokemonListProps> = ({
   const [pokemonWithTypes, setPokemonWithTypes] = useState<Pokemon[]>([]);
 
   useEffect(() => {
+    if (pokemonsFiltered.length === 0) {
+      setPokemonWithTypes([]); // Asegura que el estado se actualiza si no hay resultados
+      return;
+    }
+
     const fetchPokemonTypes = async () => {
-      const pokemonData = await Promise.all(
-        pokemonsFiltered.map(async (pokemon) => {
-          try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
-            const data = await response.json();
-            return {
-              ...pokemon,
-              types: data.types.map((type: any) => ({
-                id: type.type.url.split("/").slice(-2, -1)[0],
-                name: type.type.name,
-              })),
-            };
-          } catch (error) {
-            console.error(`Error fetching types for Pokémon ${pokemon.name}:`, error);
-            return {
-              ...pokemon,
-              types: [],
-            };
-          }
-        })
-      );
-      setPokemonWithTypes(pokemonData);
+      try {
+        const pokemonData = await Promise.all(
+          pokemonsFiltered.map(async (pokemon) => {
+            try {
+              const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
+              if (!response.ok) throw new Error("Error al obtener los datos");
+
+              const data = await response.json();
+              return {
+                ...pokemon,
+                types: data.types.map((type: any) => ({
+                  id: Number(type.type.url.split("/").slice(-2, -1)[0]),
+                  name: type.type.name,
+                })),
+              };
+            } catch (error) {
+              console.error(`Error fetching types for ${pokemon.name}:`, error);
+              return { ...pokemon, types: [] };
+            }
+          })
+        );
+        setPokemonWithTypes(pokemonData);
+      } catch (error) {
+        console.error("Error al cargar los Pokémon:", error);
+      }
     };
 
-    if (pokemonsFiltered.length > 0) {
-      fetchPokemonTypes();
-    }
+    fetchPokemonTypes();
   }, [pokemonsFiltered]);
 
   return (
@@ -102,7 +106,7 @@ const PokemonList: React.FC<PokemonListProps> = ({
             />
           ))
         ) : (
-          <p>No se encontraron Pokémon.</p>
+          <p className="no-results-message">No se encontraron Pokémon.</p>
         )}
       </div>
     </div>

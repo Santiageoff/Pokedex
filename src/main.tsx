@@ -7,7 +7,7 @@ import PokemonDetail from "./components/PokemonDetail/PokemonDetail";
 
 // Configurar Apollo Client
 const client = new ApolloClient({
-  uri: "https://beta.pokeapi.co/graphql/v1beta", // URL de la API
+  uri: "https://beta.pokeapi.co/graphql/v1beta", 
   cache: new InMemoryCache(),
 });
 
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     element: <Home />,
   },
   {
-    path: "/pokedex", // 🔹 Cambié "pokemonlist" por "pokedex" para coincidir con el botón en Home.tsx
+    path: "/pokedex", 
     element: <App />,
   },
   {
