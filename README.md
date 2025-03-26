@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
+# 📖 Pokédex App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+📌 Aplicación web de Pokédex que muestra información detallada de Pokémon con un diseño atractivo y responsive.
 
-Currently, two official plugins are available:
+## 📌 Tabla de Contenidos
+- Características
+- Tecnologías utilizadas
+- Instalación y ejecución
+- Funcionalidades principales
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## ⭐ Características
+✔️ Visualización de tarjetas de Pokémon con imágenes y tipos.  
+✔️ Diseño responsive adaptable a móviles y escritorio.  
+✔️ Búsqueda y filtrado de Pokémon por nombre y tipo.  
+✔️ Página de detalles con estadísticas de combate, peso, altura y habilidades.  
+✔️ Navegación fluida con React Router.  
+✔️ Consumo de datos con GraphQL desde la PokéAPI.  
+✔️ Indicador de carga y manejo de errores en las peticiones a la API.
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 🔧 Tecnologías Utilizadas
+- **Frontend:** React + Vite  
+- **Lenguaje:** TypeScript  
+- **Estilos:** CSS puro  
+- **API:** GraphQL con PokéAPI  
+- **Routing:** React Router  
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🖼️ Capturas de Pantalla
+### Lista Pokemon(Pokedex) 
+![Captura de pantalla de la aplicación](public/Lista_Pokemones.png)
+### Filtrado por Tipo
+![Captura de pantalla de la aplicación](public/Filtrado_Nombre.png)
+### Filtrado por Nombre
+![Captura de pantalla de la aplicación](public/Filtrado_Tipo.png)
+### Carta Pokemon
+![Captura de pantalla de la aplicación](public/Carta_Pokemon.png)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+
+---
+
+## 🚀 Instalación y Ejecución
+
+### 1️⃣ Clonar el repositorio
+```bash
+git clone https://github.com/Santiageoff/Pokedex.git
+#### Instalar Dependencias npm install
+#### Ejecutar en modo desarollador npm run dev
