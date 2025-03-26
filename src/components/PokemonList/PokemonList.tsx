@@ -88,7 +88,10 @@ const PokemonList: React.FC<PokemonListProps> = ({
 
       <div className="pokemonGrid">
         {isLoading ? (
-          <p>Cargando Pokémon...</p>
+          <div className="loading-container">
+            <img src="/Cambio 2 Pikachu.gif" alt="Cargando..." className="loading-gif" />
+            <p className="loading-text">Cargando...</p>
+          </div>
         ) : pokemonWithTypes.length > 0 ? (
           pokemonWithTypes.map((pokemon) => (
             <PokemonCard
