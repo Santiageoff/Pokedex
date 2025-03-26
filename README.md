@@ -32,6 +32,8 @@
 ---
 
 ## 🖼️ Capturas de Pantalla
+### Ingresar Pokedex() 
+![Captura de pantalla de la aplicación](public/Inicio_Ingresar.png)
 ### Lista Pokemon(Pokedex) 
 ![Captura de pantalla de la aplicación](public/Lista_Pokemones.png)
 ### Filtrado por Tipo

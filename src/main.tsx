@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import Home from "./components/Pages/home";
 import App from "./App";
 import PokemonDetail from "./components/PokemonDetail/PokemonDetail";
 
@@ -14,11 +15,15 @@ const client = new ApolloClient({
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />, // Página principal
+    element: <Home />,
+  },
+  {
+    path: "/pokedex", // 🔹 Cambié "pokemonlist" por "pokedex" para coincidir con el botón en Home.tsx
+    element: <App />,
   },
   {
     path: "/pokemon/:id",
-    element: <PokemonDetail />, // Página de detalles del Pokémon
+    element: <PokemonDetail />,
   },
 ]);
 

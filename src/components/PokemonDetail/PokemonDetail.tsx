@@ -99,13 +99,15 @@ const PokemonDetail: React.FC = () => {
   const typeClass = pokemon.pokemon_v2_pokemontypes?.[0]?.pokemon_v2_type.name || "normal";
 
   // Obtener la página de origen (por defecto, vuelve a la página 1)
-  const fromPage = location.state?.fromPage || 1;
+// Obtener la página de origen (por defecto, vuelve a la lista en /pokedex)
+const fromPage = location.state?.fromPage ? `/?page=${location.state.fromPage}` : "/pokedex";
 
-  return (
-    <div className={`bg type-${typeClass}`}>
-      <button onClick={() => navigate(`/?page=${fromPage}`)} className="backButton">
-        ← Volver
-      </button>
+return (
+  <div className={`bg type-${typeClass}`}>
+    <button onClick={() => navigate(fromPage)} className="backButton">
+      ← Volver
+    </button>
+
 
       {/* Contenedor con fondo difuminado */}
       <div
