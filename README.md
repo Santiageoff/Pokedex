@@ -48,8 +48,15 @@
 
 ## 🚀 Instalación y Ejecución
 
-### 1️⃣ Clonar el repositorio
+### 1️⃣ Clonar el repositorio (Forma uno)
 ```bash
 git clone https://github.com/Santiageoff/Pokedex.git
-#### Instalar Dependencias npm install
-#### Ejecutar en modo desarollador npm run dev
+npm install  # Instalar dependencias
+npm run dev  # Ejecutar en modo desarrollador
+```
+### Abrir Link Publico 
+#### Puedes acceder a la aplicación en producción en el siguiente enlace: 
+https://pokedex-pi-beryl.vercel.app
+
+
+
