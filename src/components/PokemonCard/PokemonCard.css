@@ -15,11 +15,26 @@
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
   background-color: white;
+  position: relative; /* 🔹 Necesario para posicionar el número */
 }
 
 .pokemonCard:hover {
   transform: scale(1.08);
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 📌 Ajuste del número del Pokémon (Ubicado arriba a la izquierda) */
+.pokemonNumberCard {
+  font-size: 16px;
+  color: #000000;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+  position: absolute;
+  top: 10px;   /* 🔹 Ajuste para que quede arriba */
+  left: 10px;  /* 🔹 Ajuste para que quede a la izquierda */
+  background-color: rgba(255, 255, 255, 0.8); /* 🔹 Fondo semitransparente para mejor visibilidad */
+  padding: 5px 10px;
+  border-radius: 8px;
 }
 
 /* 📌 Ajuste de la imagen del Pokémon */
@@ -41,14 +56,6 @@
   overflow: visible; /* 🔹 Asegura que se vea todo */
   font-family: 'Press Start 2P', cursive;
   padding: 0 10px; /* 🔹 Espaciado lateral */
-}
-
-/* 📌 Ajuste del número del Pokémon */
-.pokemonNumber {
-  font-size: 16px;
-  color: #000000;
-  font-weight: bold;
-  font-family: 'Press Start 2P', cursive;
 }
 
 /* 📌 Ajuste de los tipos de Pokémon */

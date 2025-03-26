@@ -34,7 +34,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ id, name, types = [] }) => {
         onError={(e) => (e.currentTarget.src = "/fallback.png")}
       />
       <h3 className="pokemonName">{name}</h3>
-      <p className="pokemonNumber">#{id}</p>
+      <p className="pokemonNumberCard">#{id}</p>
       <div className="pokemonTypes">
         {types.length > 0 ? (
           types.map((type) => (

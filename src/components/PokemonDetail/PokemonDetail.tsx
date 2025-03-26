@@ -107,51 +107,67 @@ const PokemonDetail: React.FC = () => {
         ← Volver
       </button>
 
-      <div className="info">
-        <img
-          src={imageUrl}
-          alt={`Imagen de ${pokemon.name}`}
-          className="pokemonImage"
-          onError={(e) => (e.currentTarget.src = "/fallback.png")}
-        />
+      {/* Contenedor con fondo difuminado */}
+      <div
+        className="info"
+        style={{
+          backgroundImage: `url('/Fondo 4.jpg')`, 
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          position: "relative",
+        }}
+      >
+        {/* Capa difuminada para no afectar el contenido */}
+        <div className="blurOverlay"></div>
 
-        {/* Nombre del Pokémon con la primera letra en mayúscula */}
-        <h1 className="pokemonName">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
-        <p>#{pokemon.id}</p>
+        {/* Contenedor de contenido para que no se vea borroso */}
+        <div className="infoContent">
+          <img
+            src={imageUrl}
+            alt={`Imagen de ${pokemon.name}`}
+            className="pokemonImage"
+            onError={(e) => (e.currentTarget.src = "/fallback.png")}
+          />
 
-        {/* Tipos de Pokémon */}
-        <div className="pokemonTypes">
-          {pokemon.pokemon_v2_pokemontypes.map((type) => (
-            <span key={type.pokemon_v2_type.name} className="pokemonType">
-              {type.pokemon_v2_type.name}
-            </span>
-          ))}
-        </div>
+          {/* Nombre del Pokémon */}
+          <h1 className="pokemonName">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
+          <p className="pokemonNumberDetail">#{id}</p>
 
-        {/* Estadísticas con barras de progreso */}
-        <div className="pokemonStats">
-          {pokemon.pokemon_v2_pokemonstats.map((stat) => {
-            const percentage = (stat.base_stat / 150) * 100; // Escala a 100% basado en 150 como máximo
-            return (
-              <div key={stat.pokemon_v2_stat.name} className="pokemonStat">
-                <strong>{stat.pokemon_v2_stat.name}:</strong>
-                <div className="statBar">
-                  <div
-                    className={`statFill ${stat.pokemon_v2_stat.name}`}
-                    style={{ width: `${percentage}%` }}
-                  >
-                    {stat.base_stat}
+          {/* Tipos de Pokémon */}
+          <div className="pokemonTypes">
+            {pokemon.pokemon_v2_pokemontypes.map((type) => (
+              <span key={type.pokemon_v2_type.name} className="pokemonType">
+                {type.pokemon_v2_type.name}
+              </span>
+            ))}
+          </div>
+
+          {/* Estadísticas */}
+          <div className="pokemonStats">
+            {pokemon.pokemon_v2_pokemonstats.map((stat) => {
+              const percentage = (stat.base_stat / 150) * 100;
+              return (
+                <div key={stat.pokemon_v2_stat.name} className="pokemonStat">
+                  <strong>{stat.pokemon_v2_stat.name}:</strong>
+                  <div className="statBar">
+                    <div
+                      className={`statFill ${stat.pokemon_v2_stat.name}`}
+                      style={{ width: `${percentage}%` }}
+                    >
+                      {stat.base_stat}
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
 
-        {/* Peso y altura con nuevo diseño */}
-        <div className="pokemonWeightHeight">
-          <div className="weight">Peso: {pokemon.weight / 10} kg</div>
-          <div className="height">Altura: {pokemon.height / 10} m</div>
+          {/* Peso y altura */}
+          <div className="pokemonWeightHeight">
+            <div className="weight">Peso: {pokemon.weight / 10} kg</div>
+            <div className="height">Altura: {pokemon.height / 10} m</div>
+          </div>
         </div>
       </div>
     </div>
