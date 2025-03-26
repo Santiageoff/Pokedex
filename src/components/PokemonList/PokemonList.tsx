@@ -23,6 +23,8 @@ interface PokemonListProps {
   changeTypeSelected: (type: PokeType | null) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
+  page: number; // Agregado para corregir el error
+  perPage: number; // Agregado para corregir el error
 }
 
 const PokemonList: React.FC<PokemonListProps> = ({
@@ -37,37 +39,30 @@ const PokemonList: React.FC<PokemonListProps> = ({
   const [pokemonWithTypes, setPokemonWithTypes] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    if (pokemonsFiltered.length === 0) {
-      setPokemonWithTypes([]); // Asegura que el estado se actualiza si no hay resultados
-      return;
-    }
-
     const fetchPokemonTypes = async () => {
-      try {
-        const pokemonData = await Promise.all(
-          pokemonsFiltered.map(async (pokemon) => {
-            try {
-              const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
-              if (!response.ok) throw new Error("Error al obtener los datos");
+      if (pokemonsFiltered.length === 0) return;
 
-              const data = await response.json();
-              return {
-                ...pokemon,
-                types: data.types.map((type: any) => ({
-                  id: Number(type.type.url.split("/").slice(-2, -1)[0]),
-                  name: type.type.name,
-                })),
-              };
-            } catch (error) {
-              console.error(`Error fetching types for ${pokemon.name}:`, error);
-              return { ...pokemon, types: [] };
-            }
-          })
-        );
-        setPokemonWithTypes(pokemonData);
-      } catch (error) {
-        console.error("Error al cargar los Pokémon:", error);
-      }
+      const pokemonData = await Promise.all(
+        pokemonsFiltered.map(async (pokemon) => {
+          try {
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`);
+            if (!response.ok) throw new Error("Error al obtener los datos");
+
+            const data = await response.json();
+            return {
+              ...pokemon,
+              types: data.types.map((type: any) => ({
+                id: Number(type.type.url.split("/").slice(-2, -1)[0]),
+                name: type.type.name,
+              })),
+            };
+          } catch (error) {
+            console.error(`Error fetching types for ${pokemon.name}:`, error);
+            return { ...pokemon, types: [] };
+          }
+        })
+      );
+      setPokemonWithTypes(pokemonData);
     };
 
     fetchPokemonTypes();
