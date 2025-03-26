@@ -134,13 +134,16 @@ const PokemonDetail: React.FC = () => {
           <h1 className="pokemonName">{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h1>
           <p className="pokemonNumberDetail">#{id}</p>
 
-          {/* Tipos de Pokémon */}
+          {/* Tipos de Pokémon con color de fondo dinámico */}
           <div className="pokemonTypes">
-            {pokemon.pokemon_v2_pokemontypes.map((type) => (
-              <span key={type.pokemon_v2_type.name} className="pokemonType">
-                {type.pokemon_v2_type.name}
-              </span>
-            ))}
+            {pokemon.pokemon_v2_pokemontypes.map((type) => {
+              const typeName = type.pokemon_v2_type.name;
+              return (
+                <span key={typeName} className={`pokemonType type-${typeName}`}>
+                  {typeName}
+                </span>
+              );
+            })}
           </div>
 
           {/* Estadísticas */}

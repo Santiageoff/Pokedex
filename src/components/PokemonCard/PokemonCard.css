@@ -1,21 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-/* 📌 Estilos de la tarjeta de Pokémon */
 .pokemonCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  width: 380px;  /* 🔹 Más ancho para que entren los nombres largos */
-  height: 320px; /* 🔹 Mantiene altura */
+  width: clamp(280px, 40vw, 380px);  
+  height: clamp(250px, 35vw, 320px);  
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   cursor: pointer;
   background-color: white;
-  position: relative; /* 🔹 Necesario para posicionar el número */
+  position: relative;
 }
 
 .pokemonCard:hover {
@@ -23,42 +22,35 @@
   box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* 📌 Ajuste del número del Pokémon (Ubicado arriba a la izquierda) */
 .pokemonNumberCard {
-  font-size: 16px;
+  font-size: clamp(12px, 1.5vw, 16px);
   color: #000000;
   font-weight: bold;
   font-family: 'Press Start 2P', cursive;
   position: absolute;
-  top: 10px;   /* 🔹 Ajuste para que quede arriba */
-  left: 10px;  /* 🔹 Ajuste para que quede a la izquierda */
-  background-color: rgba(255, 255, 255, 0.8); /* 🔹 Fondo semitransparente para mejor visibilidad */
+  top: 10px;
+  left: 10px;
+  background-color: rgba(255, 255, 255, 0.8);
   padding: 5px 10px;
   border-radius: 8px;
 }
 
-/* 📌 Ajuste de la imagen del Pokémon */
 .pokemonImage {
-  width: 150px;
-  height: 150px;
+  width: clamp(100px, 15vw, 150px);
+  height: clamp(100px, 15vw, 150px);
   object-fit: contain;
 }
 
-/* 📌 Ajuste del nombre del Pokémon en la tarjeta */
 .pokemonName {
-  font-size: clamp(14px, 2vw, 20px); /* 🔹 Se adapta al tamaño de la pantalla */
+  font-size: clamp(14px, 2vw, 20px);
   font-weight: bold;
   text-transform: capitalize;
   color: #000000;
   text-align: center;
-  max-width: 100%;
-  white-space: nowrap; /* 🔹 Evita que el texto baje a otra línea */
-  overflow: visible; /* 🔹 Asegura que se vea todo */
   font-family: 'Press Start 2P', cursive;
-  padding: 0 10px; /* 🔹 Espaciado lateral */
+  padding: 0 10px;
 }
 
-/* 📌 Ajuste de los tipos de Pokémon */
 .pokemonTypes {
   display: flex;
   flex-wrap: wrap;
@@ -70,7 +62,7 @@
 .pokemonType {
   padding: 6px 14px;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: clamp(10px, 1.5vw, 14px);
   font-weight: bold;
   color: #fff;
   text-align: center;
@@ -78,7 +70,7 @@
   max-width: 100px;
 }
 
-/* 📌 Mejor contraste de colores por tipo */
+/* Estilos de los tipos */
 .type-normal { background: linear-gradient(135deg, #b8b89f, #8c8c7c); }
 .type-fire { background: linear-gradient(135deg, #ff9c54, #e36422); }
 .type-water { background: linear-gradient(135deg, #76befe, #3b8ef3); }
@@ -97,3 +89,37 @@
 .type-dark { background: linear-gradient(135deg, #705746, #503e30); }
 .type-steel { background: linear-gradient(135deg, #b7b7ce, #8d8d9f); }
 .type-fairy { background: linear-gradient(135deg, #d685ad, #b16489); }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .pokemonCard {
+    width: 90%;
+    height: auto;
+  }
+
+  .pokemonImage {
+    width: 120px;
+    height: 120px;
+  }
+
+  .pokemonType {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pokemonCard {
+    width: 100%;
+    height: auto;
+  }
+
+  .pokemonName {
+    font-size: 12px;
+  }
+
+  .pokemonType {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+}
