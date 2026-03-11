@@ -36,10 +36,12 @@
 ![Captura de pantalla de la aplicación](public/Inicio_Ingresar.png)
 ### Lista Pokemon(Pokedex) 
 ![Captura de pantalla de la aplicación](public/Lista_Pokemones.png)
-### Filtrado por Tipo
-![Captura de pantalla de la aplicación](public/Filtrado_Nombre.png)
 ### Filtrado por Nombre
+![Captura de pantalla de la aplicación](public/Filtrado_Nombre.png)
+### Filtrado por Tipo
 ![Captura de pantalla de la aplicación](public/Filtrado_Tipo.png)
+### Si no se encuentra el pokemon
+![Captura de pantalla de la aplicación](public/Manejo_Errores.png)
 ### Carta Pokemon
 ![Captura de pantalla de la aplicación](public/Carta_Pokemon.png)
 
