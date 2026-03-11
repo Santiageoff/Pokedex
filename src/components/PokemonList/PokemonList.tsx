@@ -13,6 +13,8 @@ interface Pokemon {
   id: number;
   name: string;
   types?: PokeType[];
+  weight?: number;
+  height?: number;
 }
 
 interface PokemonListProps {
@@ -40,7 +42,10 @@ const PokemonList: React.FC<PokemonListProps> = ({
 
   useEffect(() => {
     const fetchPokemonTypes = async () => {
-      if (pokemonsFiltered.length === 0) return;
+      if (pokemonsFiltered.length === 0) {
+        setPokemonWithTypes([]);
+        return;
+      }
 
       const pokemonData = await Promise.all(
         pokemonsFiltered.map(async (pokemon) => {
@@ -51,6 +56,8 @@ const PokemonList: React.FC<PokemonListProps> = ({
             const data = await response.json();
             return {
               ...pokemon,
+              weight: data.weight,
+              height: data.height,
               types: data.types.map((type: any) => ({
                 id: Number(type.type.url.split("/").slice(-2, -1)[0]),
                 name: type.type.name,
@@ -98,10 +105,19 @@ const PokemonList: React.FC<PokemonListProps> = ({
               id={pokemon.id}
               name={pokemon.name}
               types={pokemon.types ?? []}
+              weight={pokemon.weight}
+              height={pokemon.height}
             />
           ))
         ) : (
-          <p className="no-results-message">No se encontraron Pokémon.</p>
+          <div className="empty-state">
+            <img src="/fallback.gif" alt="Not found icon" className="empty-state-icon" />
+            <h2 className="empty-state-title">¡Ups! Ningún Pokémon a la vista</h2>
+            <p className="empty-state-text">
+              No hemos encontrado coincidencias con "{searchTerm}".<br />
+              Prueba buscando con otro nombre o ajustando los filtros.
+            </p>
+          </div>
         )}
       </div>
     </div>

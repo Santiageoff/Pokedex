@@ -130,37 +130,9 @@
   padding: 1rem;
 }
 
-/* Tarjeta de cada Pokémon */
-.pokemonCard {
-  position: relative; 
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 1rem;
-  text-decoration: none;
-  color: #222;
-  width: 300px;
-  text-align: center;
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
-
-.pokemonCard:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Imagen de Pokémon */
-.pokemonImage {
-  width: 150px;
-  height: 150px;
-}
+/* Tarjeta de cada Pokémon (Limpiadas las clases antiguas porque el Componente tiene su CSS propio) */
 
 /* Nombre y número */
-.pokemonName {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-}
-
 .pokemonNumber {
   position: absolute;
   top: 10px;
@@ -213,4 +185,41 @@
   .pokemonGrid {
       grid-template-columns: repeat(1, 1fr);
   }
+}
+
+/* Empty State para búsquedas sin resultados */
+.empty-state {
+  grid-column: 1 / -1; /* Ocupa todo el grid */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 16px;
+  max-width: 500px;
+  margin: 40px auto;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.empty-state-icon {
+  width: 120px;
+  height: 120px;
+  opacity: 0.6;
+  margin-bottom: 20px;
+  filter: grayscale(1);
+}
+
+.empty-state-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.empty-state-text {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0;
 }
